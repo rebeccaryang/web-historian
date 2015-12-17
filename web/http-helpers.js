@@ -17,6 +17,8 @@ exports.serveAssets = function(res, asset, callback) {
       res.end(err);
     } else if (callback){
       res.statusCode = 200;
+      content = JSON.parse(content) || content;
+      res.writeHead('content-type','text/html')
       res.end(callback(content));
     } else {
       res.statusCode = 200;

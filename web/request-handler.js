@@ -1,5 +1,5 @@
 var path = require('path');
-var archive = require('../helpers/archive-helpers');
+//var archive = require('../helpers/archive-helpers');
 var url = require('url');
 var helpers = require('./http-helpers.js');
 var fs = require('fs');
@@ -40,12 +40,24 @@ exports.handleRequest = function (req, res) {
   			stringifiedData += chunk;
   		});
   		res.statusCode = 302;
+
   		req.on('end', function(){
-  			//TO DO: Check if the key already exists!
-  			siteList[stringifiedData.slice(4)] = 'In progress';
-  			helpers.writeDocument(siteList, __dirname + '/archives/sites.txt');
-  		});
-  		helpers.serveAssets(res, __dirname + router['/loading']);
+        stringifiedData = stringifiedData.slice(4);
+  			if(siteList[stringifiedData] === undefined){
+          siteList[stringifiedData] = 'In progress';
+          helpers.writeDocument(siteList, __dirname + '/archives/sites.txt');
+          helpers.serveAssets(res, __dirname + router['/loading']);
+        }
+        else if(siteList[stringifiedData] === 'Completed'){
+          console.log(siteList[stringifiedData]);
+          helpers.serveAssets(res, __dirname + '/archives/sites/' + stringifiedData);
+          
+        } else {
+    		  helpers.serveAssets(res, __dirname + router['/loading']);
+        }
+        
+      });
+
   	}
 
   	if(req.method === 'GET'){
