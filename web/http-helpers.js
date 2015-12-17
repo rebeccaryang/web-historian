@@ -22,22 +22,18 @@ exports.serveAssets = function(res, asset, callback) {
       res.statusCode = 200;
       res.end(content);
     }
-  })
+  });
 };
 
-// exports.getFile = function(path, scheme, callback){
-//   var results;
-//   fs.readFile(path, scheme, function(err,content){
-//     if(!err){
-//       return callback(err,content);
-//     } else {
-//       console.log(err);
-//       return callback(err);
-//     }
-
-//     // return callback(err,results);
-//   });
-// }
+exports.writeDocument = function(data, asset) {
+  fs.writeFile(asset, JSON.stringify(data), function(err){
+    if(err){
+      console.log(err);
+    } else {
+      console.log('File written successfully.. maybe...')
+    }
+  });
+};
 
 
 
