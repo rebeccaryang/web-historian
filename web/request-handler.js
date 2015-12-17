@@ -4,15 +4,20 @@ var url = require('url');
 var helpers = require('./http-helpers.js');
 var fs = require('fs');
 
-// require more modules/folders here!
 
+//===================================
+// Routes
 var router = {
 	'/':'/public/index.html',
-	'/styles.css':'/public/styles.css'
+	'/styles.css':'/public/styles.css',
+	'/loading':'/public/loading.html'
 };
 
-var siteList = '';
 
+
+// ===================================
+// Create SiteList(memory)
+var siteList = '';
 fs.readFile(__dirname + '/archives/sites.txt', function(err, content){
 	if(err){
 		console.log(err);
@@ -21,6 +26,10 @@ fs.readFile(__dirname + '/archives/sites.txt', function(err, content){
 	}
 });
 
+
+
+// ===================================
+// Request Handler
 exports.handleRequest = function (req, res) {
   var dir = url.parse(req.url).pathname;
   if(router[dir]){
@@ -30,12 +39,18 @@ exports.handleRequest = function (req, res) {
   		req.on('data', function(chunk){
   			stringifiedData += chunk;
   		});
+  		res.statusCode = 302;
   		req.on('end', function(){
+  			//TO DO: Check if the key already exists!
   			siteList[stringifiedData.slice(4)] = 'In progress';
   			helpers.writeDocument(siteList, __dirname + '/archives/sites.txt');
   		});
+  		helpers.serveAssets(res, __dirname + router['/loading']);
   	}
-	helpers.serveAssets(res, __dirname + router[dir]);	
+
+  	if(req.method === 'GET'){
+		helpers.serveAssets(res, __dirname + router[dir]);		
+  	}
   }
   
   // res.end(archive.paths.list);
