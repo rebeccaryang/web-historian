@@ -2,6 +2,19 @@ var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
 
+exports.writeToArchive = function(url, data){
+	fs.writeFile('../web/archives/sites/' + url, JSON.stringify(data), function(err){
+		if(err) {
+			console.log(err);
+		} else {
+			console.log("write to archive successful");
+		}
+	});
+	// Put data in file
+	// Update sites.txt?
+}
+
+
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
  * Consider using the `paths` object below to store frequently used file paths. This way,
@@ -9,33 +22,33 @@ var _ = require('underscore');
  * customize it in any way you wish.
  */
 
-exports.paths = {
-  siteAssets: path.join(__dirname, '../web/public'),
-  archivedSites: path.join(__dirname, '../archives/sites'),
-  list: path.join(__dirname, '../archives/sites.txt')
-};
+// exports.paths = {
+//   siteAssets: path.join(__dirname, '../web/public'),
+//   archivedSites: path.join(__dirname, '../archives/sites'),
+//   list: path.join(__dirname, '../archives/sites.txt')
+// };
 
 // Used for stubbing paths for tests, do not modify
-exports.initialize = function(pathsObj) {
-  _.each(pathsObj, function(path, type) {
-    exports.paths[type] = path;
-  });
-};
+// exports.initialize = function(pathsObj) {
+//   _.each(pathsObj, function(path, type) {
+//     exports.paths[type] = path;
+//   });
+// };
 
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
-exports.readListOfUrls = function() {
-};
+// exports.readListOfUrls = function() {
+// };
 
-exports.isUrlInList = function() {
-};
+// exports.isUrlInList = function() {
+// };
 
-exports.addUrlToList = function() {
-};
+// exports.addUrlToList = function() {
+// };
 
-exports.isUrlArchived = function() {
-};
+// exports.isUrlArchived = function() {
+// };
 
-exports.downloadUrls = function() {
-};
+// exports.downloadUrls = function() {
+// };
