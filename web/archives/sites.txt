@@ -1,1 +1,1 @@
-{"www.google.com":"In progress","www.nytimes.com":"In progress"}
+{"www.google.com":"Completed","www.nytimes.com":"Completed","wwwwwww.wwww.wwwww":"Not Found","www.yahoo.com":"Completed","abc.efg.www.xyz.richardsimmons":"Not Found","www.reuters.com":"Completed","www.nybooks.com":"Completed","www.reddit.com":"Completed","www.aljazeera.com":"Completed","www.cnn.com":"Completed"}
