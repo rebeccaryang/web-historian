@@ -11,10 +11,33 @@ exports.headers = headers = {
 };
 
 exports.serveAssets = function(res, asset, callback) {
-  // Write some code here that helps serve up your static files!
-  // (Static files are things like html (yours or archived from others...),
-  // css, or anything that doesn't change often.)
+  fs.readFile(asset, function(err, content){
+    if(err){
+      res.statusCode = 500;
+      res.end(err);
+    } else if (callback){
+      res.statusCode = 200;
+      res.end(callback(content));
+    } else {
+      res.statusCode = 200;
+      res.end(content);
+    }
+  })
 };
+
+// exports.getFile = function(path, scheme, callback){
+//   var results;
+//   fs.readFile(path, scheme, function(err,content){
+//     if(!err){
+//       return callback(err,content);
+//     } else {
+//       console.log(err);
+//       return callback(err);
+//     }
+
+//     // return callback(err,results);
+//   });
+// }
 
 
 
