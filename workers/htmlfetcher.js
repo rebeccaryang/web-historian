@@ -28,7 +28,7 @@ var findSites = function(){
 					sitesToScrape.push([key])
 				}
 			}
-			if(siteList.length > 0){
+			if(sitesToScrape.length > 0){
 				scrapingSites();	
 			}
 			//write results to sites.txt
