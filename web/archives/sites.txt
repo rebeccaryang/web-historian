@@ -1,1 +1,1 @@
-{"www.facebook.com":"In progress","WHOA%21":"In progress"}
+{"www.google.com":"In progress","www.nytimes.com":"In progress"}
